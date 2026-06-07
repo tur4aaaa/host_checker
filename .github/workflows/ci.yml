@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   lint:
@@ -18,10 +18,13 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install ruff mypy types-requests fastapi
+        run: pip install ruff mypy types-requests fastapi pytest pytest-mock requests-mock
 
       - name: Run ruff
         run: ruff check main.py
 
       - name: Run mypy
         run: mypy main.py
+
+      - name: Run tests
+        run: pytest test_main.py -v
